@@ -2,13 +2,20 @@ import { Background } from "@react-navigation/elements";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 export default function App(){
-    const [isPlay, setIsPlay] = useState(false)
-    const [daftarMusic, setDaftarmusic] = useState(["lagu 1", "lagu 2", "lagu 3","lagu 4", "lagu 5","lagu 6"]);
+
+    const [isPlay, setIsPlay] = useState(false);
+
+    const router = useRouter();
+
+    const [daftarMusic, setDaftarmusic] = useState(["lagu 1", "lagu 2", "lagu 3","lagu 4", "lagu 5","lagu 6", "lagu 7", "lagu 8", "lagu 9","lagu 10", "lagu 11","lagu 12", "lagu 13", "lagu 14", "lagu 15","lagu 16", "lagu 17","lagu 18"]);
     return(
         <View style={styles.main}>
             <View style={styles.judulLagu}>
-                <Text></Text> 
+                <TouchableOpacity style={styles.kembali} onPress={()=> {router.push("/(tabs)")}}>
+                    <Text> kembali </Text>
+                </TouchableOpacity>
             </View>
             <ScrollView style={styles.daftarMusic}>
                 {daftarMusic.map((judul, index) =>(
@@ -21,8 +28,8 @@ export default function App(){
             </ScrollView>
             <View style={styles.musicDiputar}>
                 <Text>music yang di putar</Text>
-                <TouchableOpacity style={styles.tombol}>
-                    <Image source={require("../../assets/images/pause2.jpg")} style={{width:35, height:35}}></Image>
+                <TouchableOpacity style={styles.tombol} onPress={() => setIsPlay(!isPlay)}>
+                    <Image style={{width:35, height:35}} source= {isPlay ? require("../../assets/images/pause2.jpg") : require("../../assets/images/Play.jpg")}>{}</Image>
                 </TouchableOpacity>
             </View>
         </View>
@@ -36,21 +43,36 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
     },
+    kembali:{
+        justifyContent:"center",
+        alignItems:"flex-end",
+        borderColor:"black",
+        borderWidth:3,
+        height:30,
+        width:60,
+        right:5
+    },
     judulLagu:{
-        margin:20,
+        margin:10,
         backgroundColor:"white",
         borderWidth:3,
         borderColor:"black",
         height:40,
         width:320,
-        justifyContent:"center",
+        bottom:25,
+        justifyContent:"flex-end",
+        flexDirection:"row",
         alignItems:"center",
+        
+        
+
     },
     daftarMusic:{
+        bottom:30,
         borderWidth:3,
         borderColor:"black",
         width:320,
-        maxHeight:600,
+        maxHeight:550,
         backgroundColor:"lightblue"
     },
     musicDiputar:{

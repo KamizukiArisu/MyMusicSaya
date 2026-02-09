@@ -3,12 +3,16 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from 'react
 import {useState} from "react";
 import {LinearGradient} from "expo-linear-gradient";
 import { DEFAULT_ICON_SIZE } from '@expo/vector-icons/build/createIconSet';
+import { useRootNavigationState } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 export default function App() {
+  const route = useRouter();
 
   const [url, setUrl] = useState('');
 
-  const [view, setView] = useState(false);
+  const [tampilan, setTampilan] = useState(false);
+  
 
 const handleDownload = async () => {
     // 1. Cek dulu apakah link ada isinya
@@ -54,17 +58,13 @@ const handleDownload = async () => {
       <View style={styles.borderRiwayat}>
         <View>
           <Text style={{fontSize:30,}}>
-            riwayat:
-            </Text>
+            riwayat:</Text>
             <Text style={{fontSize:20}}>
-              terakhir 1
-            </Text>
+              terakhir 1</Text>
             <Text style={{fontSize:20}}>
-              terakhir 2
-            </Text>
+              terakhir 2</Text>
             <Text style={{fontSize:20}}>
-              terakhir 3
-            </Text>
+              terakhir 3</Text>
             <Text style={{fontSize:20}}>
               terakhir 4</Text>
             <Text style={{fontSize:20}}>
@@ -74,7 +74,7 @@ const handleDownload = async () => {
             <Text style={{fontSize:20}}>
               terakhir 7</Text>
         </View>
-        <TouchableOpacity style={styles.tombolMusic} >
+        <TouchableOpacity style={styles.tombolMusic} onPress={() => route.push("/playList")}>
           <Text style={styles.logoMusic}>➡️</Text>
         </TouchableOpacity>
       </View>
