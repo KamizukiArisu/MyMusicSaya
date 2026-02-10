@@ -53,7 +53,9 @@ const handleDownload = async () => {
       <TextInput placeholder='masukkan link di sini' style={styles.borderLink}
       value={url} onChangeText={(text)=>setUrl(text)}></TextInput>
       <TouchableOpacity style={styles.buton} onPress={handleDownload}>
-        <Text> DOWNLOAD </Text>
+        <View style={{justifyContent:"center"}}>
+          <Text> DOWNLOAD </Text></View>
+        
       </TouchableOpacity>
       <View style={styles.borderRiwayat}>
         <View>
@@ -99,7 +101,9 @@ const styles = StyleSheet.create({
     borderRadius:3,
     flexDirection:"row",
     justifyContent:"center",
+    alignItems:"center",
     backgroundColor:"white",
+    
   },
   borderPetunjuk:{
     padding:15,

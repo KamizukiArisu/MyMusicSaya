@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         borderColor:"black",
         width:320,
         maxHeight:550,
-        backgroundColor:"lightblue"
+        backgroundColor:"gray",
     },
     musicDiputar:{
         position:"absolute",
