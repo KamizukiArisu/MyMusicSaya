@@ -6,9 +6,7 @@ import { useRouter } from "expo-router";
 export default function App(){
 
     const [isPlay, setIsPlay] = useState(false);
-
     const router = useRouter();
-
     const [daftarMusic, setDaftarmusic] = useState(["lagu 1", "lagu 2", "lagu 3","lagu 4", "lagu 5","lagu 6", "lagu 7", "lagu 8", "lagu 9","lagu 10", "lagu 11","lagu 12", "lagu 13", "lagu 14", "lagu 15","lagu 16", "lagu 17","lagu 18"]);
     return(
         <View style={styles.main}>
