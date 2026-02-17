@@ -7,6 +7,7 @@ import * as MediaLibrary from "expo-media-library";
 import Tombol from "./Tombol";
 import TombolSkipKiri from "./tombolSkipKiri";
 import TombolSkip from "./TombolSkip";
+import TombolDaftar from "./Tombol_Daftar";
 
 
 export default function App(){
@@ -14,15 +15,20 @@ export default function App(){
     const [isPlay, setIsPlay] = useState(false);
     const router = useRouter();
     const [daftarMusic, setDaftarmusic] = useState(["lagu 1", "lagu 2", "lagu 3","lagu 4", "lagu 5","lagu 6", "lagu 7", "lagu 8", "lagu 9","lagu 10", "lagu 11","lagu 12", "lagu 13", "lagu 14", "lagu 15","lagu 16", "lagu 17","lagu 18"]);
+    const [tombolDaftar, setTombolDaftar] = useState(false);
+
+    //gambar pause play
+    const play = require('../../assets/images//play_gemini.png');
+    const pause = require('../../assets/images/pause_gemini.png');
+
+
+    const [nyala, setNyala] = useState(true);
     
-    const [toombolDaftar, setTombolDaftar] = useState(false);
+    
+    const [musicDiputar, setMusicDiputar] = useState('Tidak memutar')
     
     
-    
-    
-    
-    
-    
+        
     // tempan menyimpan music 
         const [daftar, setDaftar] = useState<MediaLibrary.Asset[]>([]);
         const [permissionResponse, requestResponse] = MediaLibrary.usePermissions();
@@ -40,33 +46,50 @@ export default function App(){
         }
         useEffect(() => {getMusic()},
     []);
-
     return(
-        <View style={styles.main}>
-            <View style={styles.judulLagu}>
-                <TouchableOpacity style={styles.kembali} onPress={()=> {router.push("/(tabs)")}}>
-                    <Text> kembali </Text>
-                </TouchableOpacity>
-            </View>
-            <ScrollView style={styles.daftarMusic}>
-                {daftarMusic.map((value, index) => (<TouchableOpacity style={styles.itemDaftarmusic}>
-                    <Text>{value}</Text> <View style={styles.tombolmusic}> <Tombol/> </View>
-                    </TouchableOpacity>))}
-            </ScrollView>
-            <View style={styles.musicDiputar}>
-                <View style={styles.musicdalam}>
-                    <Text>music yang di putar</Text>
-                    <View style={styles.kelompokTombol}>
-                        <TombolSkipKiri/>
-                        <Tombol/>
-                        <TombolSkip/>
-                    </View>
-                </View>
-            </View>
-            
+
+// Tombol kembali paling dan induk elemen
+
+    <View style={styles.main}>
+        <View style={styles.judulLagu}>
+            <TouchableOpacity style={styles.kembali} onPress={()=> {router.push("/(tabs)")}}>
+                <Text> kembali </Text>
+            </TouchableOpacity>
         </View>
+
+{/* daftarMusic */}
+
+    <ScrollView style={styles.daftarMusic} contentContainerStyle={{alignItems:"center"}}>
+        {daftarMusic.map((value, index) => (
+            <TouchableOpacity style={styles.itemDaftarmusic} onPress={()=> setMusicDiputar(value)}>
+                <Text>{value}</Text> 
+
+
+                {/* ini yang di ubah */}
+
+                
+                <View style={styles.tombolmusic}> <TombolDaftar/> </View>
+            </TouchableOpacity>))}
+    </ScrollView>
+
+{/* Tombol music yang sedang di putar */}
+
+    <View style={styles.musicDiputar}>
+        <View style={styles.musicdalam}>
+            <Text style={{margin:4}}>{musicDiputar}</Text>
+            <View style={styles.kelompokTombol}>
+                <TombolSkipKiri/>
+                {/* ini yang di ubah */}
+                <Tombol/>
+                <TombolSkip/>
+            </View>
+        </View>
+    </View>
+
+{/* Penutup view induk */}
+    </View>
     );
-}
+    }
 
 const styles = StyleSheet.create({
     main:{
@@ -86,6 +109,7 @@ const styles = StyleSheet.create({
     },
     judulLagu:{
         margin:10,
+        marginTop:50,
         backgroundColor:"white",
         borderWidth:3,
         borderColor:"black",
@@ -98,16 +122,19 @@ const styles = StyleSheet.create({
         
     },
     daftarMusic:{
+        
         bottom:30,
         borderWidth:3,
         borderColor:"black",
         width:320,
         maxHeight:550,
         backgroundColor:"gray",
+        
     },
     musicDiputar:{
         justifyContent:"center",
         margin:3,
+        backgroundColor:"white",
         borderWidth:3,
         bottom:30,
         width:320,
@@ -115,8 +142,6 @@ const styles = StyleSheet.create({
     },
     musicdalam:{
         flexDirection:"row",
-        borderWidth:2,
-        borderColor:"blue",
         justifyContent:"space-between",
         alignItems:"center"
     },
@@ -133,8 +158,6 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:"center",
         alignItems:"center",
-        borderWidth:3,
-        borderColor:"blue",
         width:30,
         height:30,
     },
